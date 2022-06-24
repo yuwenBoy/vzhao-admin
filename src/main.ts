@@ -2,7 +2,8 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import { router, setupRouter } from './router';
 import { setupLoadingDirectives} from './directives'
-import "ant-design-vue/dist/antd.css";
+// import "ant-design-vue/dist/antd.less";
+import('ant-design-vue/dist/antd.less');
 
 async function bootstrap() {
     const app = createApp(App);
