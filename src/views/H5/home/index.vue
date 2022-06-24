@@ -1,7 +1,7 @@
 <template>
     <!-- <h2>v3学习目录</h2> -->
     <!-- <button @click="register">用户注册</button> -->
-    <button @click="openLoading">全局加载</button>
+    <!-- <button @click="openLoading">全局加载</button> -->
     <Loading 
     :loading="loading"
     :absolute="absolute"
@@ -12,7 +12,7 @@
      <RouterView />
     <div class="tab">
          <ul class="tab_content">
-            <li v-for="(item,index) in tabList" :key="item.id" @click="tabClick(item,index)" :class="{'active':tab_active === index}">{{ item.name }}</li>
+            <li v-for="(item,index) in tabList" :key="item.id" @click="tabClick(item,index)" :class="{'active':tab_active === index}">{{ item.name }}<span v-html="item.icon"></span></li>
          </ul>
     </div>
 </template>
@@ -37,34 +37,27 @@
 import { defineComponent,ref,reactive,toRefs } from 'vue'
 import { useRouter } from 'vue-router'
 import { Loading,useLoading } from '../../../components/Ant_Loading'
-
+// import {
+//   HomeOutlined,
+//   SettingFilled,
+//   SmileOutlined,
+//   SyncOutlined,
+//   LoadingOutlined,
+// } from '@ant-design/icons-vue';
 export default defineComponent({
     components:{
         Loading
     },
     setup() {
-       
         const tab_active = ref(0)
         const tabList =reactive([{name:'首页',id:1,icon:'',url:'Home'},{name:'Demo',id:2,icon:'',url:'Demo'},{name:'消息',id:3,icon:'',url:'Message'},{name:'我的',id:4,icon:'',url:'My'}])
         let router = useRouter()
-        const register= ()=>{
-              console.log('跳转注册')
-              router.push({name:'Register'})
-       }
-
-       const tabClick = (item,index)=>{
-        console.log(item)
-              tab_active.value = index
-              router.push({name:item.url})
-       }
-
-
-       const compState = reactive({
-        absoulute:false,
-        loading:false,
-        theme:'dark',
-        background:'rgba(111,111,111,.7)',
-        tip:'加载中...'
+         const compState = reactive({
+            absoulute:false,
+            loading:false,
+            theme:'dark',
+            background:'rgba(111,111,111,.7)',
+            tip:'加载中...' 
        });
 
        function open(absolute:boolean){
@@ -74,17 +67,19 @@ export default defineComponent({
                 compState.loading = false;
             },2000)
        }
-       const openLoading = ()=>{
-            open(false)
-       }
 
+       const tabClick = (item,index)=>{
+        console.log(item)
+              tab_active.value = index
+              router.push({name:item.url})
+              open(false)
+       }
        return {
         tabList,
-         register,
+        //  register,
          tab_active,
          tabClick,
          compState,
-         openLoading,
           ...toRefs(compState),
        }
     },
