@@ -15,3 +15,22 @@
   margin: 0;
 }
 </style>
+
+<script lang="ts">
+import { defineComponent,watch } from 'vue'
+import { useRoute } from 'vue-router'
+export default defineComponent({
+  setup() {
+    const route = useRoute();
+    watch(()=> route.path,(newVal,oldVal)=>{
+      console.log(newVal);
+      console.log(oldVal)
+      localStorage.setItem('page',newVal)
+    })
+    return {
+
+    }
+  },
+})
+</script>
+

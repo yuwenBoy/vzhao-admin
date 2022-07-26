@@ -1,4 +1,4 @@
-import { createLoading } from "../components/Ant_Loading/src/createLoading";
+import { createLoading } from "../components/Loading/src/createLoading";
 import type { Directive,App } from "vue";
 const loadingDirective:Directive = {
     mounted(el,binding){
