@@ -54,7 +54,6 @@ const tabList = [
 const active = ref(0);
 
 const tabSwitch = (e: Object) => {
-  debugger;
   active.value = parseInt(e.target.dataset.tabid);
   // 当前点击元素的左边距离
   const distanceL = document
@@ -150,7 +149,7 @@ const tabSwitch = (e: Object) => {
           font-weight: 500;
           border-bottom: 2px solid;
           padding: 10px 0;
-          transition: all 0.3s;
+          // transition: all 0.3s;
         }
       }
     }
