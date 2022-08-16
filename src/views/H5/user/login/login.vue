@@ -1,8 +1,8 @@
 <template>
     <div>登录页面</div>
-    <button @click="register">用户注册</button>
+    <!-- <button @click="register">用户注册</button> -->
 </template>
-<script lang="ts">
+<!-- <script lang="ts">
 import { defineComponent } from 'vue'
 import { useRouter } from 'vue-router'
 export default defineComponent({
@@ -17,4 +17,4 @@ export default defineComponent({
        }
     },
 })
-</script>
+</script> -->

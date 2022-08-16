@@ -1,0 +1,1 @@
+export const APP_DARK_MODE_KEY_ = 'APP_DARK_MODE_KEY_';
