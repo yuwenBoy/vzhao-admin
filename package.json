@@ -1,7 +1,12 @@
 {
   "name": "jxxqz-h5",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "author": {
+    "name": "zhaojian",
+    "email": "663104562@qq.com",
+    "url": "https://github.com/yuwenBoy"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
@@ -9,6 +14,7 @@
   },
   "dependencies": {
     "@ant-design/colors": "^6.0.0",
+    "@vueuse/core": "^9.4.0",
     "ant-design-vue": "^2.2.8",
     "dotenv": "^16.0.3",
     "fs-extra": "^10.1.0",
