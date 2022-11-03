@@ -1,5 +1,5 @@
 import { VNode, defineComponent } from "vue";
-import type { LoadingProps } from "./pyping";
+import type { LoadingProps } from "./typing";
 import { createVNode,render,reactive,h} from 'vue';
 import Loading from './Loading.vue'
 
@@ -45,12 +45,12 @@ export function createLoading(props?:Partial<LoadingProps>,target?:HTMLElement,w
         vm,
         close,
         open,
-        setTip:(tip:string) =>{
-            data.tip = tip
-        },
-        setLoading:(loading:boolean) =>{
-            data.loading = loading
-        },
+        setTip: (tip: string) => {
+            data.tip = tip;
+          },
+          setLoading: (loading: boolean) => {
+            data.loading = loading;
+          },
         get loading(){
             return data.loading;
         },

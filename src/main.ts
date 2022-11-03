@@ -2,9 +2,16 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import { router, setupRouter } from './router';
 import { setupLoadingDirectives} from './directives'
-// import "ant-design-vue/dist/antd.less";
-import('ant-design-vue/dist/antd.less');
-// import 'virtual:windi.css';
+
+if(import.meta.env.DEV){
+    import('ant-design-vue/dist/antd.less');
+}
+// import 'virtual:windi.css'; 
+// 等价于
+// import 'virtual:windi-base.css';
+// import 'virtual:windi-components.css';
+// import 'virtual:windi-utilities.css';
+import 'virtual:windi.css'; 
 
 async function bootstrap() {
     const app = createApp(App);

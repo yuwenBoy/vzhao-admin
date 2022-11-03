@@ -25,10 +25,10 @@ export const adminRootRoue:AppRouteRecordRaw = {
 export const adminLoginRoute:AppRouteRecordRaw = {
     path:'/login',
     name:'Login',
-    component:() => import('/@/views/admin/sys/login/Login.vue'),
+    component: () => import('/@/views/admin/sys/login/Login.vue'),
     meta:{
-        title:'后台登录'
-    }
+        title:'后台登录',
+    },
 }
 
 
@@ -82,7 +82,7 @@ export const rootRoute:AppRouteRecordRaw = {
 export const LoginRoute:AppRouteRecordRaw ={
     path:'/login',
     name:'Login',
-    component:() => import('/@/views/H5/user/login/login.vue'),
+    component: () => import('/@/views/H5/user/login/login.vue'),
     meta: {
         title:'v3登录'
     }
@@ -90,7 +90,7 @@ export const LoginRoute:AppRouteRecordRaw ={
 export const RegisterRoute:AppRouteRecordRaw ={
     path:'/register',
     name:'Register',
-    component:() => import('/@/views/H5/user/register/register.vue'),
+    component: () => import('/@/views/H5/user/register/register.vue'),
     meta: {
         title:'v3注册'
     }
