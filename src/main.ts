@@ -1,3 +1,8 @@
+import '/@/design/index.less';
+import 'virtual:windi-base.css';
+import 'virtual:windi-components.css';
+import 'virtual:windi-utilities.css';
+import 'virtual:svg-icons-register';
 import { createApp } from 'vue'
 import App from './App.vue'
 import { router, setupRouter } from './router';
@@ -11,7 +16,6 @@ if(import.meta.env.DEV){
 // import 'virtual:windi-base.css';
 // import 'virtual:windi-components.css';
 // import 'virtual:windi-utilities.css';
-import 'virtual:windi.css'; 
 
 async function bootstrap() {
     const app = createApp(App);
