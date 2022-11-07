@@ -1,5 +1,5 @@
 import type { App } from "vue";
 import { setupLoadingDirective } from "./loading";
-export function setupLoadingDirectives(app:App){
+export function setupGlobDirdctives(app:App){
     setupLoadingDirective(app);
 }

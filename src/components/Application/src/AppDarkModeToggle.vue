@@ -1,5 +1,5 @@
 <template>
-  <div  :class="getClass" @click="toggelDarkMode">
+  <div :class="getClass" @click="toggelDarkMode">
     <div :class="`${prefixCls}-inner`"></div>
     <SvgIcon size="14" name="sun"></SvgIcon>
     <SvgIcon size="14" name="moon"></SvgIcon>
@@ -14,9 +14,9 @@ import { ThemeEnum } from '/@/enums/appEnum';
 
 const { prefixCls } = useDesign('dark-switch');
 
-// const { getShowDarkModeToggle } = useRootSetting();
+const { getDarkMode, setDarkMode } = useRootSetting();
 // 默认模式
-const isDark = computed(() => false); // computed(() => )
+const isDark = computed(() => getDarkMode.value === ThemeEnum.DARK);
 
 const getClass = computed(() => [
   prefixCls,
@@ -26,7 +26,8 @@ const getClass = computed(() => [
 ]);
 
 function toggelDarkMode() {
-  alert(123);
+  const darkMode = getDarkMode.value === ThemeEnum.DARK ? ThemeEnum.LIGHT : ThemeEnum.DARK;
+  setDarkMode(darkMode);
 }
 </script>
 
@@ -59,13 +60,13 @@ html[data-theme='dark'] {
     height: 18px;
     background-color: #fff;
     border-radius: 50%;
-    transition: transform 0.5s,background-color 0.5s;
+    transition: transform 0.5s, background-color 0.5s;
     will-change: transform;
   }
   &--dark {
-      .@{prefix-cls}-inner {
-        transform: translateX(calc(100% + 2px));
-      }
+    .@{prefix-cls}-inner {
+      transform: translateX(calc(100% + 2px));
     }
+  }
 }
 </style>

@@ -12,7 +12,7 @@ interface AppState {
   // Page loading status
   pageLoading: boolean;
   // project config
-  projectConfig: PrqojectConfig | null;
+  projectConfig: ProjectConfig | null;
 
   //projectConfig:
   beforeMiniInfo: BeforeMiniState;
@@ -37,7 +37,12 @@ export const useAppStore = defineStore({
       return this.projectConfig || ({} as ProjectConfig);
     },
   },
-  actions: {},
+  actions: {
+    setDarkMode(mode: ThemeEnum): void {
+      this.darkMode = mode;
+      localStorage.setItem(APP_DARK_MODE_KEY_, mode);
+    },
+  },
 });
 
 // Need to be used outside the setup

@@ -6,7 +6,8 @@ import 'virtual:svg-icons-register';
 import { createApp } from 'vue'
 import App from './App.vue'
 import { router, setupRouter } from './router';
-import { setupLoadingDirectives} from './directives'
+import { setupStore } from '/@/store';
+import { setupGlobDirdctives } from './directives'
 
 if(import.meta.env.DEV){
     import('ant-design-vue/dist/antd.less');
@@ -19,10 +20,19 @@ if(import.meta.env.DEV){
 
 async function bootstrap() {
     const app = createApp(App);
+
+    // 引入pina 状态管理
+    setupStore(app);
+
+    // 引入路由
     setupRouter(app);
-    setupLoadingDirectives(app);
-    app.use(router)
-    app.mount('#app')
+
+    // 引入全局指令
+    setupGlobDirdctives(app);
+
+    app.use(router);
+
+    app.mount('#app');
  
 }
 // const app = createApp(App)
