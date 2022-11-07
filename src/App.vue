@@ -7,7 +7,7 @@
     </AppProvider>
   </ConfigProvider>
 </template>
-
+<!-- 
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -18,7 +18,7 @@
   /* margin-top: 60px; */
   margin: 0;
 }
-</style>
+</style> -->
 
 <script lang="ts" setup>
 import { ConfigProvider } from "ant-design-vue";

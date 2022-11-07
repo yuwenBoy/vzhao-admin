@@ -3,11 +3,11 @@ import 'virtual:windi-base.css';
 import 'virtual:windi-components.css';
 import 'virtual:windi-utilities.css';
 import 'virtual:svg-icons-register';
-import { createApp } from 'vue'
-import App from './App.vue'
+import App from './App.vue';
+import { createApp } from 'vue';
 import { router, setupRouter } from './router';
 import { setupStore } from '/@/store';
-import { setupGlobDirdctives } from './directives'
+import { setupGlobDirdctives } from '/@/directives'
 
 if(import.meta.env.DEV){
     import('ant-design-vue/dist/antd.less');
