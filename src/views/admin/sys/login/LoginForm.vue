@@ -73,8 +73,8 @@ const loading = ref(false);
 const rememberMe = ref(false);
 
 const formData = reactive({
-    // account: 'vzhao',
-    // password: '123456'
+    account: '', // vzhao
+    password: '' //123456
 })
 
 const { getFormRules } = useFormRules();
