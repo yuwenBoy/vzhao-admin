@@ -11,9 +11,13 @@ import {
   MULTIPLE_TABS_KEY,
 } from '/@/enums/cacheEnum';
 
+
+import { createLocalStorage, createSessionStorage } from '/@/utils/cache';
 import { Memory } from './memory';
 
 import { DEFAULT_CACHE_TIME } from '/@/settings/encryptionSetting';
+
+import { toRaw } from 'vue';
 
 interface BasicStore {
   [TOKEN_KEY]: string | number | null | undefined;
@@ -23,15 +27,27 @@ interface BasicStore {
 type LocalStore = BasicStore;
 
 type SessionStore = BasicStore;
-export type BasicKeys = keyof BasicStore;
 
+export type BasicKeys = keyof BasicStore;
 type LocalKeys = keyof LocalStore;
-// type SessionKeys = keyof SessionKeys;
+type SessionKeys = keyof SessionStore;
+
+const ls = createLocalStorage();
+const ss = createSessionStorage();
 
 const localMemory = new Memory(DEFAULT_CACHE_TIME);
 const sessionMemory = new Memory(DEFAULT_CACHE_TIME);
 export class Persistent {
   static getLocal<T>(key: LocalKeys) {
     return localMemory.get(key)?.value as Nullable<T>;
+  }
+
+  static setLocal(key: LocalKeys, value: LocalStore[LocalKeys], immediate = false): void {
+    localMemory.set(key, toRaw(value));
+    immediate && ls.set(APP_LOCAL_CACHE_KEY, localMemory.getCache);
+  }
+
+  static getSession<T>(key: SessionKeys) {
+    return sessionMemory.get(key)?.value as Nullable<T>;
   }
 }

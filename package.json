@@ -16,6 +16,7 @@
     "@ant-design/colors": "^6.0.0",
     "@vueuse/core": "^9.4.0",
     "ant-design-vue": "^2.2.8",
+    "crypto-js": "^4.1.1",
     "dotenv": "^16.0.3",
     "fs-extra": "^10.1.0",
     "node-sass": "^7.0.1",
