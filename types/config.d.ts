@@ -1,6 +1,12 @@
 export interface ProjectConfig {
+  // Storage location of permission related information
+  permissionCacheType: CacheTypeEnum;
   showDarkModeToggle: boolean;
   ShowSettingButton: boolean;
+}
+
+export interface GlobConfig {
+  apiUrl: string;
 }
 
 export interface GlobEnvConfig {

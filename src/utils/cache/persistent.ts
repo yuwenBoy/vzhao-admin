@@ -47,7 +47,22 @@ export class Persistent {
     immediate && ls.set(APP_LOCAL_CACHE_KEY, localMemory.getCache);
   }
 
+  static clearLocal(immediate = false): void {
+    localMemory.clear();
+    immediate && ls.clear();
+  }
+
   static getSession<T>(key: SessionKeys) {
     return sessionMemory.get(key)?.value as Nullable<T>;
+  }
+
+  static setSession(key: SessionKeys,value: SessionStore[SessionKeys],immediate = false): void {
+    sessionMemory.set(key,toRaw(value));
+    immediate && ss.set(APP_SESSION_CACHE_KEY,sessionMemory.getCache);
+  }
+
+  static clearSession(immediate = false): void {
+    sessionMemory.clear();
+    immediate && ss.clear();
   }
 }
