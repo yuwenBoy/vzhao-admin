@@ -12,7 +12,7 @@ import { isFunction } from '/@/utils/is';
 
 import { cloneDeep } from 'lodash-es';
 
-import { ContenTypeEnum } from '/@/enums/httpEnum';
+import { ContentTypeEnum } from '/@/enums/httpEnum';
 import { RequestEnum } from '/@/enums/httpEnum';
 
 export * from './axiosTransform';
@@ -109,7 +109,7 @@ export class VAxios {
     const headers = config.headers || this.options.headers;
     const contentType = headers?.['Content-Type'] || headers?.['content-type'];
 
-    if(contentType!==ContenTypeEnum.FORM_URLENCODED || !Reflect.has(config,'data') || config.method?.toUpperCase() ===RequestEnum.GET){
+    if(contentType!==ContentTypeEnum.FORM_URLENCODED || !Reflect.has(config,'data') || config.method?.toUpperCase() ===RequestEnum.GET){
            return config;
     }
     return {

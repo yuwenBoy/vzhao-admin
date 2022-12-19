@@ -1,7 +1,7 @@
 /**
  * @description: contentType
  */
-export enum ContenTypeEnum {
+export enum ContentTypeEnum {
   // json
   JSON = 'application/json;charset=UTF-8',
   // form-data qs

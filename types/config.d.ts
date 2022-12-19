@@ -3,10 +3,14 @@ export interface ProjectConfig {
   permissionCacheType: CacheTypeEnum;
   showDarkModeToggle: boolean;
   ShowSettingButton: boolean;
+   // Session timeout processing
+   sessionTimeoutProcessing: SessionTimeoutProcessingEnum;
 }
 
 export interface GlobConfig {
   apiUrl: string;
+   //  Service interface url prefix
+   urlPrefix?: string;
 }
 
 export interface GlobEnvConfig {
