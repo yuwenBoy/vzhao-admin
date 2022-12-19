@@ -95,6 +95,8 @@ import {
 import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from './useLogin';
 import { useUserStore } from '/@/store/modules/user';
 import { useDesign } from '/@/hooks/web/useDesign';
+
+import { useMessage } from '/@/hooks/web/useMessage';
 const ACol = Col;
 const ARow = Row;
 const FormItem = Form.Item;
@@ -119,6 +121,7 @@ const { setLoginState, getLoginState } = useLoginState();
 const getShow = computed(() => unref(getLoginState) === LoginStateEnum.LOGIN);
 
 const { validForm } = useFormValid(formRef);
+const { notification, createErrorModal } = useMessage();
 
 // 用户登录
 async function handleLogin() {
@@ -143,7 +146,11 @@ async function handleLogin() {
       });
     }
   } catch (error) {
-    alert(error);
+    createErrorModal({
+        title:'错误提示',
+        content: (error as unknown as Error).message || '网络异常，请检查您的网络连接是否正常!',
+        getContainer: () => document.body.querySelector(`.${prefixCls}`) || document.body,
+      });
   } finally {
     loading.value = false;
   }

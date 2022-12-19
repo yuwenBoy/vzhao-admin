@@ -158,6 +158,7 @@ export default defineComponent({
        }
        .text{
         font-size: 12px;
+        margin: 0px auto;
        }
     }
     li {
