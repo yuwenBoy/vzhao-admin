@@ -3,10 +3,10 @@ import { RoleInfo } from "/@/api/admin/model/userModel";
 
 export interface UserInfo {
     userId:string |number;
-    username:string;
-    realName:string;
+    // username:string;
+    cName:string;
     avatar:string;
-    desc?:string;
+    email?:string;
     homePath?:string;
     roles:RoleInfo[];
 }

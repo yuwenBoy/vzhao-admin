@@ -1,5 +1,5 @@
 import { ErrorMessageMode } from '/#/axios';
-import { useMessage } from '/@/hooks/web/useMessage';
+import { useMessage } from '../../../hooks/web/useMessage';
 import { SessionTimeoutProcessingEnum } from '/@/enums/appEnum';
 import { useUserStoreWithOut } from '/@/store/modules/user';
 import projectSetting from '/@/settings/projectSetting';

@@ -2,6 +2,7 @@ import type { AppRouteRecordRaw,AppRouteModule } from '/@/router/types';
 import { PageEnum } from '../../enums/pageEnum';
 
 const modules = import.meta.globEager('./admin/**/*.ts');
+import { REDIRECT_ROUTE } from '/@/router/routes/basic';
 const routeModuleList: AppRouteModule[]= [];
 Object.keys(modules).forEach((key) =>{
     const mod = modules[key].default || {};
@@ -11,9 +12,7 @@ Object.keys(modules).forEach((key) =>{
 
 export const asyncRoutes = [...routeModuleList]
 
-
-
-export const adminRootRoue:AppRouteRecordRaw = {
+export const rootRoute:AppRouteRecordRaw = {
     path: '/',
     name:'Root',
     redirect: PageEnum.BASE_LOGIN,
@@ -22,7 +21,7 @@ export const adminRootRoue:AppRouteRecordRaw = {
     }
 }
 
-export const adminLoginRoute:AppRouteRecordRaw = {
+export const loginRoute:AppRouteRecordRaw = {
     path:'/login',
     name:'Login',
     component: () => import('/@/views/admin/sys/login/Login.vue'),
@@ -31,8 +30,7 @@ export const adminLoginRoute:AppRouteRecordRaw = {
     },
 }
 
-
-export const rootRoute:AppRouteRecordRaw = {
+export const h5RootRoute:AppRouteRecordRaw = {
     path: '/',
     name: 'Root',
     redirect: PageEnum.BASE_HOME,
@@ -99,11 +97,12 @@ export const RegisterRoute:AppRouteRecordRaw ={
 export const h5basicRoutes = [
     RegisterRoute,
     LoginRoute,
-    rootRoute,
+    h5RootRoute,
 ];
 
 
 export const adminBasicRoutes = [
-    adminLoginRoute,
-    adminRootRoue
+    loginRoute,
+    rootRoute,
+    REDIRECT_ROUTE
 ]
