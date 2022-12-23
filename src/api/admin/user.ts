@@ -6,11 +6,22 @@ export function loginApi(params: LoginParams, mode: ErrorMessageMode = 'modal') 
   console.log(params)
   return defHttp.post<LoginResultModel>(
     {
-      url: '/user/login',
+      url: '//localhost:9000/basic-api/user/login',
+  //     proxy:{
+  //       host: '//localhost',
+  //       port: 9000
+  // // auth?: {
+  // //   username: string;
+  // //   password:string;
+  // // };
+  // // protocol?: string;
+  //     },
       params,
     },
     {
+      apiUrl:'',
       errorMessageMode: mode,
+      // urlPrefix:'//localhost:9000/system/user/login',
     },
   );
 }

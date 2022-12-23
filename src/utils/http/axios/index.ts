@@ -184,7 +184,6 @@ const transform: AxiosTransform = {
 };
 
 function createAxios(opt?: Partial<CreateAxiosOptions>) {
-  debugger
   console.log(globSetting);
   console.log(urlPrefix);
   return new VAxios(
