@@ -151,6 +151,7 @@ export class VAxios {
         conf = this.supportFormData(conf);
 
         return new Promise((resolve,reject) => {
+          // conf.url = '//localhost:9000/user/login';
             this.axiosInstance.request<any,AxiosResponse<Result>>(conf).then((res:AxiosResponse<Result>) => {
                 if(transformRequestHook && isFunction(transformRequestHook)) {
                     try {

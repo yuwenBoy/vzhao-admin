@@ -59,9 +59,9 @@ export const useUserStore = defineStore({
     ): Promise<GetUserInfoModel | null> {
       try {
         const { goHome = true, mode, ...loginParams } = params;
-        // const data = await loginApi(loginParams, mode);
-        // const { token } = {Number:22344};//data;
-        // this.setToken(token);
+        const data = await loginApi(loginParams, mode);
+        const { token } = data;
+        this.setToken(token);
         // 登录成功之后的操作
         return this.afterLoginAction(goHome);
       } catch (error) {

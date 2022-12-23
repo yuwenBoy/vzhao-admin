@@ -41,7 +41,7 @@ const transform: AxiosTransform = {
     // 错误的时候返回
     const { data } = res;
     if (!data) {
-      throw new Error('sssssss');
+      throw new Error('请求出错，请稍候重试');
     }
 
     // 这里 code result message 为后台统一的字段，需要再types.ts 内修改为项目资金的接口返回格式
@@ -75,7 +75,7 @@ const transform: AxiosTransform = {
     } else if (options.errorMessageMode === 'message') {
       createMessage.error(timeoutMsg);
     }
-    throw new Error(timeoutMsg || 'dssss');
+    throw new Error(timeoutMsg || '请求出错，请稍候重试');
   },
   // 请求之前处理config
   beforeRequestHook: (config, options) => {
@@ -184,6 +184,9 @@ const transform: AxiosTransform = {
 };
 
 function createAxios(opt?: Partial<CreateAxiosOptions>) {
+  debugger
+  console.log(globSetting);
+  console.log(urlPrefix);
   return new VAxios(
     deepMerge(
       {

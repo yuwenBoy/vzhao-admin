@@ -125,7 +125,6 @@ const { notification, createErrorModal } = useMessage();
 
 // 用户登录
 async function handleLogin() {
-  message.info('用户登录');
   const data = await validForm();
   console.log(data);
   if (!data) return;
@@ -147,10 +146,10 @@ async function handleLogin() {
     }
   } catch (error) {
     createErrorModal({
-        title:'错误提示',
-        content: (error as unknown as Error).message || '网络异常，请检查您的网络连接是否正常!',
-        getContainer: () => document.body.querySelector(`.${prefixCls}`) || document.body,
-      });
+      title: '错误提示',
+      content: (error as unknown as Error).message || '网络异常，请检查您的网络连接是否正常!',
+      getContainer: () => document.body.querySelector(`.${prefixCls}`) || document.body,
+    });
   } finally {
     loading.value = false;
   }

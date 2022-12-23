@@ -3,9 +3,10 @@ import { ErrorMessageMode } from '/#/axios';
 import { defHttp } from '/@/utils/http/axios';
 
 export function loginApi(params: LoginParams, mode: ErrorMessageMode = 'modal') {
+  console.log(params)
   return defHttp.post<LoginResultModel>(
     {
-      url: '/login',
+      url: '/user/login',
       params,
     },
     {
