@@ -72,6 +72,16 @@ export const useUserStore = defineStore({
       this.sessionTimeout = flag;
     },
     async afterLoginAction(goHome?: boolean): Promise<GetUserInfoModel | null> {
+      if(!this.getToken) return null;
+      // get user info
+      const userInfo = await this.getUserInfoAction();
+
+      const sessionTimeout = this.sessionTimeout;
+      if(sessionTimeout){
+        this.setSessionTimeout(false);
+      }else{
+        
+      }
       goHome && (await router.replace(PageEnum.BASE_HOME));
       // if(!this.getToken) return null;
       // // get user info

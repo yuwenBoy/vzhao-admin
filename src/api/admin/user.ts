@@ -6,7 +6,7 @@ export function loginApi(params: LoginParams, mode: ErrorMessageMode = 'modal') 
   console.log(params)
   return defHttp.post<LoginResultModel>(
     {
-      url: '//localhost:9000/basic-api/user/login',
+      url: '//localhost:9000/basic-api/auth/login',
   //     proxy:{
   //       host: '//localhost',
   //       port: 9000
@@ -30,7 +30,7 @@ export function loginApi(params: LoginParams, mode: ErrorMessageMode = 'modal') 
  * @description: getUserInfo
  */
 export function getUserInfo() {
-  return defHttp.get<GetUserInfoModel>({ url: '' }, { errorMessageMode: 'none' });
+  return defHttp.get<GetUserInfoModel>({ url: '//localhost:9000/basic-api/auth/getUserInfo' }, {apiUrl:'', errorMessageMode: 'none' });
 }
 
 // 退出接口

@@ -24,12 +24,12 @@ export interface LoginResultModel {
 export interface GetUserInfoModel {
   roles: RoleInfo[];
   // 用户id
-  userId: string | number;
+  id: string | number;
   // 真实名字
-  cName: string;
+  cname: string;
 
   // 头像
-  avatar: string;
+  username: string;
 
   // 邮箱
   email?: string;
