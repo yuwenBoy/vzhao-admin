@@ -1,12 +1,13 @@
 // vue3最新状态管理模块
-import type { ProjectConfig } from '/#/config';
-import { defineStore } from 'pinia';
+import type { HeaderSetting, MenuSetting, ProjectConfig,TransitionSetting } from '/#/config';
+import { defineStore, _DeepPartial } from 'pinia';
 import { ThemeEnum } from '/@/enums/appEnum';
 import { APP_DARK_MODE_KEY_, PROJ_ZJ_KEY } from '/@/enums/cacheEnum';
 import { Persistent } from '/@/utils/cache/persistent';
 import type { BeforeMiniState } from '/#/store';
 import { store } from '/@/store';
 import { darkMode } from '/@/settings/desiginSetting';
+import { deepMerge } from '/@/utils';
 interface AppState {
   darkMode?: ThemeEnum;
   // Page loading status
@@ -36,12 +37,38 @@ export const useAppStore = defineStore({
     getProjectConfig(): ProjectConfig {
       return this.projectConfig || ({} as ProjectConfig);
     },
+
+    getTransitionSetting():TransitionSetting {
+      return this.getProjectConfig.transitionSetting;
+    },
+    getHeaderSetting():HeaderSetting {
+      return this.getProjectConfig.headerSetting;
+    },
+    getMenuSetting(): MenuSetting {
+      return this.getProjectConfig.menuSetting;
+    },
   },
   actions: {
+    setPageLoading(loading: boolean):void{
+      this.pageLoading = loading;
+    },
     setDarkMode(mode: ThemeEnum): void {
       this.darkMode = mode;
       localStorage.setItem(APP_DARK_MODE_KEY_, mode);
     },
+
+    setProjectConfig(config:_DeepPartial<ProjectConfig>):void {
+      this.projectConfig = deepMerge(this.projectConfig || {},config);
+      Persistent.setLocal(PROJ_ZJ_KEY,this.projectConfig);
+    },
+    async setPageLoadingAction(loading:boolean):Promise<void> {
+      if(loading) {
+        timeId = setTimeout(() => {
+          this.setPageLoading(loading);
+          clearTimeout(timeId);
+        })
+      }
+    }
   },
 });
 

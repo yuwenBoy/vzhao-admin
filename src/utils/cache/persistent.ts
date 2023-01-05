@@ -3,13 +3,15 @@ import { ProjectConfig } from '/#/config';
 import {
   TOKEN_KEY,
   USER_INFO_KEY,
-  // ROLES_KEY,
+  ROLES_KEY,
   LOCK_INFO_KEY,
   PROJ_ZJ_KEY,
   APP_LOCAL_CACHE_KEY,
   APP_SESSION_CACHE_KEY,
   MULTIPLE_TABS_KEY,
 } from '/@/enums/cacheEnum';
+
+import type { UserInfo } from '/#/store';
 
 
 import { createLocalStorage, createSessionStorage } from '/@/utils/cache';
@@ -21,7 +23,8 @@ import { toRaw } from 'vue';
 
 interface BasicStore {
   [TOKEN_KEY]: string | number | null | undefined;
-  [USER_INFO_KEY]: null;
+  [USER_INFO_KEY]: UserInfo;
+  [ROLES_KEY]: string[];
   [PROJ_ZJ_KEY]: ProjectConfig;
 }
 type LocalStore = BasicStore;

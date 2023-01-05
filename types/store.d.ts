@@ -2,9 +2,9 @@ import { MenuModeEnum, MenuTypeEnum } from "/@/enums/menuEnum";
 import { RoleInfo } from "/@/api/admin/model/userModel";
 
 export interface UserInfo {
-    userId:string |number;
-    // username:string;
-    cName:string;
+    id:string |number;
+    username:string;
+    cname:string;
     avatar:string;
     email?:string;
     homePath?:string;

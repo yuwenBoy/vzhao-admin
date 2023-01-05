@@ -5,6 +5,7 @@ import 'virtual:windi-utilities.css';
 import 'virtual:svg-icons-register';
 import App from './App.vue';
 import { createApp } from 'vue';
+import { initAppConfigStore } from '/@/logics/initAppConfig';
 import { router, setupRouter } from './router';
 import { setupStore } from '/@/store';
 import { setupGlobDirdctives } from '/@/directives'
@@ -23,6 +24,7 @@ async function bootstrap() {
 
     // 引入pina 状态管理
     setupStore(app);
+    initAppConfigStore();
 
     // 引入路由
     setupRouter(app);

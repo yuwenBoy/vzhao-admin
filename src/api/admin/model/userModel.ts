@@ -29,6 +29,8 @@ export interface GetUserInfoModel {
   cname: string;
 
   // 头像
+  avatar:string;
+  
   username: string;
 
   // 邮箱

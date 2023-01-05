@@ -1,5 +1,6 @@
 
 import type { App, Plugin } from 'vue';
+import { RouteLocationNormalized, RouteRecordNormalized } from 'vue-router';
 import { isObject } from './is';
 
 // 注册组件
@@ -12,6 +13,22 @@ export const withInstall = <T>(component:T,alias?:string) =>{
         }
     };
     return component as T & Plugin;
+}
+
+
+export function getRawRoute(route: RouteLocationNormalized): RouteLocationNormalized {
+  if (!route) return route;
+  const { matched, ...opt } = route;
+  return {
+    ...opt,
+    matched: (matched
+      ? matched.map((item) => ({
+          meta: item.meta,
+          name: item.name,
+          path: item.path,
+        }))
+      : undefined) as RouteRecordNormalized[],
+  };
 }
 
 /**

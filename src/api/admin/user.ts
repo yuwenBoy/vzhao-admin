@@ -2,26 +2,20 @@ import { LoginParams, LoginResultModel,GetUserInfoModel } from './model/userMode
 import { ErrorMessageMode } from '/#/axios';
 import { defHttp } from '/@/utils/http/axios';
 
+enum Api {
+  Login = '//localhost:9000/basic-api/auth/login',
+  GetUserInfo = '//localhost:9000/basic-api/auth/getUserInfo',
+}
+
 export function loginApi(params: LoginParams, mode: ErrorMessageMode = 'modal') {
-  console.log(params)
   return defHttp.post<LoginResultModel>(
     {
-      url: '//localhost:9000/basic-api/auth/login',
-  //     proxy:{
-  //       host: '//localhost',
-  //       port: 9000
-  // // auth?: {
-  // //   username: string;
-  // //   password:string;
-  // // };
-  // // protocol?: string;
-  //     },
+      url: Api.Login,
       params,
     },
     {
       apiUrl:'',
       errorMessageMode: mode,
-      // urlPrefix:'//localhost:9000/system/user/login',
     },
   );
 }
@@ -30,7 +24,7 @@ export function loginApi(params: LoginParams, mode: ErrorMessageMode = 'modal') 
  * @description: getUserInfo
  */
 export function getUserInfo() {
-  return defHttp.get<GetUserInfoModel>({ url: '//localhost:9000/basic-api/auth/getUserInfo' }, {apiUrl:'', errorMessageMode: 'none' });
+  return defHttp.get<GetUserInfoModel>({ url: Api.GetUserInfo }, {apiUrl:'', errorMessageMode: 'none' });
 }
 
 // 退出接口
