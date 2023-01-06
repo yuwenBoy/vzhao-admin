@@ -4,12 +4,14 @@ import { defineStore } from 'pinia';
 import { store } from '/@/store';
 import { useUserStore } from './user';
 import { useAppStoreWithOut } from './app';
+import projectSetting from '/@/settings/projectSetting';
 import { toRaw } from 'vue';
 import { PageEnum } from '/@/enums/pageEnum';
 import { asyncRoutes } from '/@/router/routes';
 import { filter } from '/@/utils/helper/treeHelper';
 import { flatMultiLevelRoutes } from '/@/router/helper/routeHelper';
 import { ERROR_LOG_ROUTE } from '/@/router/routes/basic';
+import { PermissionModeEnum } from '/@/enums/appEnum';
 
 interface PermissionState {
   permCodeList: string[] | number[];
@@ -29,13 +31,13 @@ export const usePermissionStore = defineStore({
     frontMenuList: [],
   }),
   getters: {
-    getIsDynamicAddedRoute():boolean {
-        return this.isDynamicAddedRoute;
-    }
+    getIsDynamicAddedRoute(): boolean {
+      return this.isDynamicAddedRoute;
+    },
   },
   actions: {
-    setDynamicAddedRoute(added:boolean){
-       this.isDynamicAddedRoute = added;
+    setDynamicAddedRoute(added: boolean) {
+      this.isDynamicAddedRoute = added;
     },
     async buildRoutesAction(): Promise<AppRouteRecordRaw[]> {
       const userStore = useUserStore();
@@ -43,14 +45,14 @@ export const usePermissionStore = defineStore({
 
       let routes: AppRouteRecordRaw[] = [];
 
-      const roleList =toRaw(userStore.getRoleList) || [];
+      const roleList = toRaw(userStore.getRoleList) || [];
 
-      //   const {permissionMode = projectSetting.permissionMode} = appStore.getProjectConfig;
+      const { permissionMode = projectSetting.permissionMode } = appStore.getProjectConfig;
 
-      const routeFilter = (route:AppRouteRecordRaw) =>{
-        const { meta} = route;
+      const routeFilter = (route: AppRouteRecordRaw) => {
+        const { meta } = route;
         const { roles } = meta || {};
-        if(!roles) return true;
+        if (!roles) return true;
         return roleList.some((role) => roles.includes(role));
       };
 
@@ -90,20 +92,25 @@ export const usePermissionStore = defineStore({
         return;
       };
 
-    //   switch
-        // routes = filter(asyncRoutes,routeFilter);
-        // routes = routes.filter(routeFilter);
-        // routes = flatMultiLevelRoutes(routes);
+      //   switch
+      // routes = filter(asyncRoutes,routeFilter);
+      // routes = routes.filter(routeFilter);
+      // routes = flatMultiLevelRoutes(routes);
 
-        // return routes;
+      // return routes;
 
-        routes = filter(asyncRoutes,routeFilter);
-        routes = routes.filter(routeFilter);
-        const menuList = [];
-        routes = filter(routes,routeRemoveIngoreFilter);
-        routes = routes.filter(routeRemoveIngoreFilter);
-        routes = flatMultiLevelRoutes(routes);
-        routes.push(ERROR_LOG_ROUTE);
+      switch(permissionMode){
+        case PermissionModeEnum.ROUTE_MAPPING:
+          routes = filter(asyncRoutes, routeFilter);
+          routes = routes.filter(routeFilter);
+          const menuList = [];
+          routes = filter(routes, routeRemoveIngoreFilter);
+          routes = routes.filter(routeRemoveIngoreFilter);
+          routes = flatMultiLevelRoutes(routes);
+        
+        break;
+      }
+      routes.push(ERROR_LOG_ROUTE);
       patchHomeAffix(routes);
       return routes;
     },

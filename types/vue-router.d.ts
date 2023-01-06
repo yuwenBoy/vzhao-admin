@@ -7,6 +7,8 @@ declare module 'vue-router' {
         orderNo?:number;
         title:string;
         roles?:RoleEnum[],
+          // Whether to ignore permissions
+        ignoreAuth?: boolean;
         // homePath?:string;
     }
 }

@@ -7,6 +7,8 @@ import App from './App.vue';
 import { createApp } from 'vue';
 import { initAppConfigStore } from '/@/logics/initAppConfig';
 import { router, setupRouter } from './router';
+import { setupRouterGuard } from '/@/router/guard'
+import { registerGlobComp } from '/@/components/registerGlobComp';
 import { setupStore } from '/@/store';
 import { setupGlobDirdctives } from '/@/directives'
 
@@ -24,7 +26,10 @@ async function bootstrap() {
 
     // 引入pina 状态管理
     setupStore(app);
+
     initAppConfigStore();
+
+    // registerGlobComp(app);
 
     // 引入路由
     setupRouter(app);
@@ -32,7 +37,8 @@ async function bootstrap() {
     // 引入全局指令
     setupGlobDirdctives(app);
 
-    app.use(router);
+    // app.use(router);
+    setupRouterGuard(router);
 
     app.mount('#app');
  

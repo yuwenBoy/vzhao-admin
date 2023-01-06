@@ -33,6 +33,7 @@ export const useUserStore = defineStore({
   }),
   getters: {
     getToken(): string {
+      debugger
       return this.token || getAuthCache<string>(TOKEN_KEY);
     },
     getUserInfo(): UserInfo {
@@ -102,7 +103,7 @@ export const useUserStore = defineStore({
           router.addRoute(PAGE_NOT_FOUND_ROUTE as unknown as RouteRecordRaw);
           permissionStore.setDynamicAddedRoute(true);
         }
-        goHome && (await router.replace(PageEnum.BASE_HOME));
+        goHome && (await router.replace(userInfo?.homePath || PageEnum.BASE_HOME));
       }
       return userInfo;
       

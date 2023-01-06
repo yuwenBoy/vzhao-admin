@@ -1,4 +1,3 @@
-import { p } from '@antfu/utils';
 import { cacheCipher } from '/@/settings/encryptionSetting';
 
 import type { EncryptionParams } from '/@/utils/cipher';

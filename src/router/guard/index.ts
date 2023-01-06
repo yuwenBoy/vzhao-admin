@@ -13,7 +13,6 @@ import { createPermissionGuard } from './permissionGuard';
 import { createStateGuard } from './stateGuard';
 
 export function setupRouterGuard(router: Router) {
-    debugger
     createPageGuard(router);
     createPageLoadingGuard(router);
     createHttpGuard(router);
@@ -26,7 +25,6 @@ export function setupRouterGuard(router: Router) {
 
 function createPageGuard(router: Router) {
   const loadedPageMap = new Map<string, boolean>();
-  debugger
   router.beforeEach(async (to) => {
     to.meta.loaded = !!loadedPageMap.get(to.path);
     setRouteChange(to);
@@ -42,7 +40,6 @@ function createPageLoadingGuard(router: Router) {
   const userStore = useUserStoreWithOut();
   const appStore = useAppStoreWithOut();
   const { getOpenPageLoading } = usetransitionSetting();
-  debugger
   router.beforeEach(async (to) => {
     if (!userStore.getToken) {
       return true;
@@ -73,7 +70,6 @@ function createHttpGuard(router: Router) {
     if(removeAllHttpPending){
         axiosCanceler = new AxiosCanceler();
     }
-    debugger
     router.beforeEach(async () =>{
         axiosCanceler?.removeAllPending();
         return true;
@@ -95,7 +91,6 @@ function createScrollGuard(router:Router){
 
 export function createMessageGuard(router:Router){
     const { closeMessageOnSwitch } = projectSetting;
-debugger
     router.beforeEach(async () =>{
         try {
             if(closeMessageOnSwitch){
@@ -112,7 +107,6 @@ debugger
 
 export function createProgressGuard(router:Router){
     const { getOpenNProgress } = usetransitionSetting();
-debugger
     router.beforeEach(async (to)=>{
         if(to.meta.loaded){
             return true;

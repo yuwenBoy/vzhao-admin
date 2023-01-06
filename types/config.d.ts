@@ -6,10 +6,11 @@ export interface ProjectConfig {
  showSettingButton: boolean;
  // Whether to show the theme switch button
  showDarkModeToggle: boolean;
+
  // Configure where the button is displayed
  settingButtonPosition: SettingButtonPositionEnum;
  // Permission mode
-//  permissionMode: PermissionModeEnum;
+ permissionMode: PermissionModeEnum;
  // Session timeout processing
  sessionTimeoutProcessing: SessionTimeoutProcessingEnum;
  // Website gray mode, open for possible mourning dates
@@ -174,3 +175,5 @@ export interface MenuSetting {
   mixSideTrigger: MixSidebarTriggerEnum;
   mixSideFixed: boolean;
 }
+
+

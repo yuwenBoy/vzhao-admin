@@ -18,7 +18,7 @@ getRouteNames(platform==='admin'?adminBasicRoutes:h5basicRoutes);
 
 // app router
 export const router = createRouter({
-    history: createWebHashHistory('/'),
+    history: createWebHashHistory("/"),
     routes: (platform==='admin'?adminBasicRoutes:h5basicRoutes) as unknown as RouteRecordRaw[],
     strict: true,
     scrollBehavior: () => ({ left: 0, top: 0 }),
