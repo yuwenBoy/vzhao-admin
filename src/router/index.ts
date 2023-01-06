@@ -7,7 +7,6 @@ import { adminBasicRoutes,h5basicRoutes } from './routes'
 let platform = 'admin'
 // 白名单应该包含基本静态路由
 const WHITE_NAME_LIST: string[] = [];
-debugger
 const getRouteNames = (array:any[])=>{
     array.forEach((item)=>{
         WHITE_NAME_LIST.push(item.name);

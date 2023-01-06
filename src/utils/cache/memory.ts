@@ -21,6 +21,7 @@ export interface Cache<V = any> {
     }
   
     setCache(cache) {
+      console.log(cache);
       this.cache = cache;
     }
   

@@ -16,12 +16,10 @@ export function createPermissionGuard(router:Router){
     const userStore = useUserStoreWithOut();
     const permissionStore = usePermissionStoreWithOut();
     router.beforeEach(async (to,from,next)=>{
-    debugger
         if(from.path === ROOT_PATH && to.path === PageEnum.BASE_HOME && userStore.getUserInfo.homePath && userStore.getUserInfo.homePath !== PageEnum.BASE_HOME){
             next(userStore.getUserInfo.homePath);
             return;
         }
-
         const token = userStore.getToken;
         if(whitePathList.includes(to.path as PageEnum)){
             if(to.path === LOGIN_PATH && token){
@@ -29,7 +27,10 @@ export function createPermissionGuard(router:Router){
                 try {
                     await userStore.afterLoginAction();
                     if(!isSessionTimeout){
-                        next((to.query?.redirect as string) || '/');
+                        // DOT:此处出现死循环，未找到问题！！！！！
+                        // next((to.query?.redirect as string) || '/');
+
+                        next(('/dashboard/analysis' as string) || '/');
                         return; 
                     }
                     
@@ -66,6 +67,7 @@ export function createPermissionGuard(router:Router){
 
         if(userStore.getLastUpdateTime ===0){
             try{
+                console.log(123);
                 await userStore.getUserInfoAction();
             }
             catch{

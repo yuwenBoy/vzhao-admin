@@ -6,7 +6,7 @@ const dashboard: AppRouteModule = {
     path:'/dashboard',
     name:'Dashboard',
     component:LAYOUT,
-    redirect:'/dashboard/anaysis',
+    redirect:'/dashboard/analysis',
     meta:{
         orderNo:10,
         icon:'',
