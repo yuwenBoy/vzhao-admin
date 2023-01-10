@@ -11,6 +11,8 @@ import { SvgIcon } from '/@/components/Icon';
 import { useDesign } from '/@/hooks/web/useDesign';
 import { useRootSetting } from '/@/hooks/setting/useRootSetting';
 import { ThemeEnum } from '/@/enums/appEnum';
+import { updateDarkTheme } from '/@/logics/theme/dark';
+import { updateHeaderBgColor, updateSidebarBgColor } from '/@/logics/theme/updateBackground';
 
 const { prefixCls } = useDesign('dark-switch');
 
@@ -26,8 +28,13 @@ const getClass = computed(() => [
 ]);
 
 function toggelDarkMode() {
+  // const darkMode = getDarkMode.value === ThemeEnum.DARK ? ThemeEnum.LIGHT : ThemeEnum.DARK;
+  // setDarkMode(darkMode);
   const darkMode = getDarkMode.value === ThemeEnum.DARK ? ThemeEnum.LIGHT : ThemeEnum.DARK;
-  setDarkMode(darkMode);
+    setDarkMode(darkMode);
+    updateDarkTheme(darkMode);
+    updateHeaderBgColor();
+    updateSidebarBgColor();
 }
 </script>
 

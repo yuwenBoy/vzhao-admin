@@ -30,7 +30,7 @@ export function createPermissionGuard(router:Router){
                         // DOT:此处出现死循环，未找到问题！！！！！
                         // next((to.query?.redirect as string) || '/');
 
-                        next(('/dashboard/analysis' as string) || '/');
+                        next((userStore.getUserInfo.homePath as string) || '/');
                         return; 
                     }
                     

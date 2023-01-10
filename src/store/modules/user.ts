@@ -29,7 +29,7 @@ export const useUserStore = defineStore({
     token: undefined,
     roleList: [],
     sessionTimeout: false,
-    lastUpdateTime: 0,
+    lastUpdateTime: 0
   }),
   getters: {
     getToken(): string {
@@ -41,13 +41,12 @@ export const useUserStore = defineStore({
     getRoleList(): RoleEnum[] {
       return this.roleList.length > 0 ? this.roleList : getAuthCache<RoleEnum[]>(ROLES_KEY);
     },
-    getSessionTimeout():boolean {
+    getSessionTimeout(): boolean {
       return !!this.sessionTimeout;
     },
-    getLastUpdateTime():number {
+    getLastUpdateTime(): number {
       return this.lastUpdateTime;
     },
-    
   },
   actions: {
     setToken(info: string | undefined) {
@@ -83,6 +82,7 @@ export const useUserStore = defineStore({
         // 登录成功之后的操作
         return this.afterLoginAction(goHome);
       } catch (error) {
+        debugger;
         return Promise.reject(error);
       }
     },
@@ -107,11 +107,10 @@ export const useUserStore = defineStore({
           router.addRoute(PAGE_NOT_FOUND_ROUTE as unknown as RouteRecordRaw);
           permissionStore.setDynamicAddedRoute(true);
         }
-        
+        //userInfo?.homePath改成/dashboard/analysis
         goHome && (await router.replace(userInfo?.homePath || PageEnum.BASE_HOME));
       }
       return userInfo;
-      
     },
     async getUserInfoAction(): Promise<UserInfo | null> {
       if (!this.getToken) return null;

@@ -23,8 +23,11 @@
 <script lang="ts" setup>
 import { ConfigProvider } from "ant-design-vue";
 import { defineComponent, watch } from "vue";
+import { useUserStore } from "/@/store/modules/user";
 import { useRoute } from "vue-router";
 import { AppProvider } from "/@/components/Application";
+
+const userStore = useUserStore();
 // export default defineComponent({
 //   setup() {
 //     const route = useRoute();

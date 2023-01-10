@@ -18,6 +18,7 @@ export function checkStatus(
       errMessage = `${msg}`;
       break;
     case 401:
+      debugger
       userStore.setToken(undefined);
       errMessage = msg || '用户没有权限（令牌、用户名、密码错误）!';
       if (stp === SessionTimeoutProcessingEnum.PAGE_COVERAGE) {
