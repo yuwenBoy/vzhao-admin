@@ -1,7 +1,7 @@
 import { UserConfig, ConfigEnv } from "vite";
 // import pkg from './package.json';
 import { loadEnv } from "vite";
-import { resolve } from "path";
+import  { resolve } from "path";
 import { generateModifyVars } from "./build/generate/generateModifyVars";
 import { wrapperEnv } from "./build/utils";
 import { createVitePlugins } from "./build/vite/plugin";
@@ -22,6 +22,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     viteEnv;
 
   const isBuild = command === "build";
+  
   return {
     base: VITE_PUBLIC_PATH,
     root,
@@ -42,7 +43,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     server: {
       host: true,
       port: VITE_PORT,
-      proxy: createProxy(VITE_PROXY),
+      proxy:createProxy(VITE_PROXY),
     },
     build: {
       target: "es2015",

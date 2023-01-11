@@ -3,8 +3,8 @@ import { ErrorMessageMode } from '/#/axios';
 import { defHttp } from '/@/utils/http/axios';
 
 enum Api {
-  Login = '//localhost:9000/basic-api/auth/login',
-  GetUserInfo = '//localhost:9000/basic-api/auth/getUserInfo',
+  Login = '/auth/login',
+  GetUserInfo = '/auth/getUserInfo',
 }
 
 export function loginApi(params: LoginParams, mode: ErrorMessageMode = 'modal') {
@@ -14,7 +14,6 @@ export function loginApi(params: LoginParams, mode: ErrorMessageMode = 'modal') 
       params,
     },
     {
-      apiUrl:'',
       errorMessageMode: mode,
     },
   );
@@ -24,7 +23,7 @@ export function loginApi(params: LoginParams, mode: ErrorMessageMode = 'modal') 
  * @description: getUserInfo
  */
 export function getUserInfo() {
-  return defHttp.get<GetUserInfoModel>({ url: Api.GetUserInfo }, {apiUrl:'', errorMessageMode: 'none' });
+  return defHttp.get<GetUserInfoModel>({ url: Api.GetUserInfo }, {errorMessageMode: 'none' });
 }
 
 // 退出接口
