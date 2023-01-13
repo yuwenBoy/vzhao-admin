@@ -97,10 +97,12 @@ import { useUserStore } from '/@/store/modules/user';
 import { useDesign } from '/@/hooks/web/useDesign';
 
 import { useMessage } from '/@/hooks/web/useMessage';
+import { useI18n } from '/@/hooks/web/useI18n';
 const ACol = Col;
 const ARow = Row;
 const FormItem = Form.Item;
 const InputPassword = Input.Password;
+const { t } = useI18n()
 
 const { prefixCls } = useDesign('login');
 const userStore = useUserStore();
@@ -139,7 +141,7 @@ async function handleLogin() {
     });
     if (userInfo) {
       notification.success({
-        message: '登录成功',
+        message: t('sys.admin.loadinSuccessTitle'),// '登录成功',
         description: '用户登录成功',
         duration: 3,
       });
