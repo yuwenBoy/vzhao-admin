@@ -1,7 +1,7 @@
 <template>
     <Layout :class="prefixCls">
       <LayoutFeatures />
-
+      <LayoutHeader />
     </Layout>
 </template>
 <script lang="ts">
@@ -9,11 +9,13 @@ import { defineComponent} from 'vue';
 import { Layout } from 'ant-design-vue';
 import { useDesign } from '/@/hooks/web/useDesign';
 import { createAsyncComponent } from '/@/utils/factory/createAsyncComponent';
+import LayoutHeader from './header/index.vue';
 export default defineComponent({
     name:'DefaultLayout',
     components:{
         LayoutFeatures:createAsyncComponent(() => import('/@/layouts/default/feature/index.vue')),
-        Layout
+        Layout,
+        LayoutHeader,
     },
     setup(){
         const { prefixCls } = useDesign('default-layout');

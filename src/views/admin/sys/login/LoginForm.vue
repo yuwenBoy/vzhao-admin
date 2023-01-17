@@ -141,8 +141,8 @@ async function handleLogin() {
     });
     if (userInfo) {
       notification.success({
-        message: t('sys.admin.loadinSuccessTitle'),// '登录成功',
-        description: '用户登录成功',
+        message: '登录成功',//t('sys.admin.loadinSuccessTitle'),// '登录成功',
+        description: '欢迎回来：'+userInfo.cname,
         duration: 3,
       });
     }
