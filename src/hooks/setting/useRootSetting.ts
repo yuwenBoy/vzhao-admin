@@ -19,6 +19,8 @@ export function useRootSetting() {
 
   const getDarkMode = computed(() => appStore.getDarkMode);
 
+  const getUseOpenBackTop = computed(() => appStore.getProjectConfig.useOpenBackTop);
+
   function setDarkMode(mode: ThemeEnum) {
     appStore.setDarkMode(mode);
   }
@@ -26,5 +28,6 @@ export function useRootSetting() {
     getShowDarkModeToggle,
     getDarkMode,
     setDarkMode,
+    getUseOpenBackTop,
   };
 }
