@@ -1,7 +1,7 @@
 <template>
     <Layout :class="prefixCls">
       <LayoutFeatures />
-      <LayoutHeader />
+      <LayoutHeader fixed/>
     </Layout>
 </template>
 <script lang="ts">
