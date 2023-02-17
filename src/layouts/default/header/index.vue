@@ -5,7 +5,13 @@
       <LayoutTrigger />
     </div>
     <div :class="`${prefixCls}-menu`"> 1 </div>
-    <div :class="`${prefixCls}-action`"> 2 </div>
+    <div :class="`${prefixCls}-action`"> 
+       <Notify :class="`${prefixCls}-action__item notify-item`"/>
+
+       <FullScreen :class="`${prefixCls}-action__Item fullscreen-item`"/>
+
+       <UserDropDown :theme="getHeaderTheme" />
+    </div>
   </Header>
 </template>
 <script lang="ts">
@@ -18,9 +24,10 @@ import { useHeaderSetting } from '/@/hooks/setting/useHeaderSetting';
 import { propTypes } from '/@/utils/propTypes';
 import { useAppInject } from '/@/hooks/web/useAppInject';
 import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
+import { Notify, FullScreen,UserDropDown } from './components'
 export default defineComponent({
   name: 'LayoutHeader',
-  components: { Header: Layout.Header, AppLogo, LayoutTrigger },
+  components: { Header: Layout.Header, AppLogo, LayoutTrigger,UserDropDown,FullScreen,Notify },
   props: {
     fixed: propTypes.bool,
   },

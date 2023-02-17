@@ -13,6 +13,9 @@ import { isArray } from '/@/utils/is';
 import { usePermissionStore } from '/@/store/modules/permission';
 import { RouteRecordRaw } from 'vue-router';
 import { PAGE_NOT_FOUND_ROUTE } from '/@/router/routes/basic';
+import { useMessage } from '/@/hooks/web/useMessage';
+
+import { h } from 'vue';
 
 interface UserState {
   userInfo: Nullable<UserInfo>;
@@ -140,6 +143,17 @@ export const useUserStore = defineStore({
       this.setUserInfo(null);
       goLogin && router.push(PageEnum.BASE_LOGIN);
     },
+    confirmLoginout() {
+      const { createConfirm } = useMessage();
+      createConfirm({
+        iconType: 'warning',
+        title: () => h('span','温馨提示'),
+        content: () => h('span','是否确认退出系统？'),
+        onOk: async () => {
+          await this.logout(true);
+        }
+      })
+    }
   },
 });
 
