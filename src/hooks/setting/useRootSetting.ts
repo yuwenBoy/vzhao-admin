@@ -3,7 +3,7 @@ import type { ProjectConfig } from '/#/config';
 import { computed } from 'vue';
 
 import { useAppStore } from '/@/store/modules/app';
-import { ThemeEnum } from '/@/enums/appEnum';
+import { ContentEnum, ThemeEnum } from '/@/enums/appEnum';
 
 type RootSetting = Omit<
   ProjectConfig,
@@ -19,9 +19,15 @@ export function useRootSetting() {
 
   const getDarkMode = computed(() => appStore.getDarkMode);
 
+  const getCanEmbedIFramePage = computed(() => appStore.getProjectConfig.canEmbedIFramePage);
+  const getOpenKeepAlive = computed(() => appStore.getProjectConfig.openKeepAlive)
   const getShowLogo = computed(() => appStore.getProjectConfig.showLogo)
-
-
+  const getPageLoading = computed(() => appStore.getPageLoading);
+  const getLayoutContentMode = computed(() =>
+    appStore.getProjectConfig.contentMode === ContentEnum.FULL
+      ? ContentEnum.FULL
+      : ContentEnum.FIXED,
+  );
   const getUseOpenBackTop = computed(() => appStore.getProjectConfig.useOpenBackTop);
 
   function setDarkMode(mode: ThemeEnum) {
@@ -32,5 +38,9 @@ export function useRootSetting() {
     getDarkMode,
     setDarkMode,
     getUseOpenBackTop,
+    getLayoutContentMode,
+    getPageLoading,
+    getOpenKeepAlive,
+    getCanEmbedIFramePage
   };
 }

@@ -2,7 +2,7 @@ import { computed } from "vue";
 import type { TransitionSetting } from "/#/config";
 import { useAppStore } from "/@/store/modules/app";
 
-export function usetransitionSetting() {
+export function useTransitionSetting() {
     const appStore = useAppStore();
 
     const getEnableTransition = computed(() =>appStore.getTransitionSetting?.enable);
@@ -19,6 +19,7 @@ export function usetransitionSetting() {
     function setTransitionSetting(transitionSetting: Partial<TransitionSetting>) {
         appStore.setProjectConfig({ transitionSetting })
     }
+ 
  
     return {
         setTransitionSetting,

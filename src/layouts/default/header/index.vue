@@ -11,6 +11,8 @@
        <FullScreen :class="`${prefixCls}-action__Item fullscreen-item`"/>
 
        <UserDropDown :theme="getHeaderTheme" />
+
+       <SettingDrawer :class="`${prefixCls}-action__item`"/>
     </div>
   </Header>
 </template>
@@ -25,9 +27,12 @@ import { propTypes } from '/@/utils/propTypes';
 import { useAppInject } from '/@/hooks/web/useAppInject';
 import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
 import { Notify, FullScreen,UserDropDown } from './components'
+import { createAsyncComponent } from '/@/utils/factory/createAsyncComponent';
 export default defineComponent({
   name: 'LayoutHeader',
-  components: { Header: Layout.Header, AppLogo, LayoutTrigger,UserDropDown,FullScreen,Notify },
+  components: { Header: Layout.Header, AppLogo, LayoutTrigger,UserDropDown,FullScreen,Notify,
+    SettingDrawer: createAsyncComponent(() => import('/@/layouts/default/setting/index.vue'))
+  },
   props: {
     fixed: propTypes.bool,
   },

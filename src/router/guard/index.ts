@@ -1,7 +1,7 @@
 import { Modal, notification } from 'ant-design-vue';
 import { unref } from 'vue';
 import type { Router, RouteLocationNormalized } from 'vue-router';
-import { usetransitionSetting } from '/@/hooks/setting/useTransitionSetting';
+import { useTransitionSetting } from '/@/hooks/setting/useTransitionSetting';
 import { setRouteChange } from '/@/logics/mitt/routeChange';
 import projectSetting from '/@/settings/projectSetting';
 import { useAppStoreWithOut } from '/@/store/modules/app';
@@ -39,7 +39,7 @@ function createPageGuard(router: Router) {
 function createPageLoadingGuard(router: Router) {
   const userStore = useUserStoreWithOut();
   const appStore = useAppStoreWithOut();
-  const { getOpenPageLoading } = usetransitionSetting();
+  const { getOpenPageLoading } = useTransitionSetting();
   router.beforeEach(async (to) => {
     if (!userStore.getToken) {
       return true;
@@ -106,7 +106,7 @@ export function createMessageGuard(router:Router){
 }
 
 export function createProgressGuard(router:Router){
-    const { getOpenNProgress } = usetransitionSetting();
+    const { getOpenNProgress } = useTransitionSetting();
     router.beforeEach(async (to)=>{
         if(to.meta.loaded){
             return true;

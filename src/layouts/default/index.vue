@@ -2,25 +2,54 @@
     <Layout :class="prefixCls">
       <LayoutFeatures />
       <LayoutHeader fixed/>
+      <Layout :class="[layoutClass]">
+          <LayoutSideBar />
+          <Layout :class="`${prefixCls}-main`">
+              <LayoutMultipleHeader />
+              <LayoutContent />
+              <LayoutFooter />
+          </Layout>
+      </Layout>
     </Layout>
 </template>
 <script lang="ts">
-import { defineComponent} from 'vue';
+import { computed, defineComponent, unref} from 'vue';
 import { Layout } from 'ant-design-vue';
 import { useDesign } from '/@/hooks/web/useDesign';
 import { createAsyncComponent } from '/@/utils/factory/createAsyncComponent';
 import LayoutHeader from './header/index.vue';
+import LayoutContent from './content/index.vue';
+
+import LayoutSideBar from './sider/index.vue';
+import LayoutMultipleHeader from './header/MultipleHeader.vue';
+import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
 export default defineComponent({
     name:'DefaultLayout',
     components:{
         LayoutFeatures:createAsyncComponent(() => import('/@/layouts/default/feature/index.vue')),
+        LayoutFooter: createAsyncComponent(() => import('/@/layouts/default/footer/index.vue')),
         Layout,
         LayoutHeader,
+        LayoutSideBar,
+        LayoutMultipleHeader,
+        LayoutContent
     },
     setup(){
         const { prefixCls } = useDesign('default-layout');
+
+        const { getIsMixsidebar } = useMenuSetting();
+
+        const layoutClass = computed(() => {
+          let cls: string[] = ['ant-layout','ant-layout-has-sider'];
+          // if(unref(getIsMixSidebar) || unref(getShowMenu)) {
+          //     cls.push('ant-layout-has-sider');
+          // }
+          return cls;
+        })
         return {
-            prefixCls
+            prefixCls,
+            getIsMixsidebar,
+            layoutClass,
         }
     }
 })

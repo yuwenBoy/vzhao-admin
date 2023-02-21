@@ -1,5 +1,5 @@
 // vue3最新状态管理模块
-import type { HeaderSetting, MenuSetting, ProjectConfig,TransitionSetting } from '/#/config';
+import type { HeaderSetting, MenuSetting, MultiTabsSetting, ProjectConfig,TransitionSetting } from '/#/config';
 import { defineStore, _DeepPartial } from 'pinia';
 import { ThemeEnum } from '/@/enums/appEnum';
 import { APP_DARK_MODE_KEY_, PROJ_ZJ_KEY } from '/@/enums/cacheEnum';
@@ -47,6 +47,9 @@ export const useAppStore = defineStore({
     getMenuSetting(): MenuSetting {
       return this.getProjectConfig.menuSetting;
     },
+    getMultiTabsSetting(): MultiTabsSetting {
+      return this.getProjectConfig.multiTabsSetting;
+    }
   },
   actions: {
     setPageLoading(loading: boolean):void{

@@ -18,6 +18,10 @@ export function useMenuSetting() {
         return unref(getMenuMode) === MenuModeEnum.INLINE && unref(getMenuType) === MenuTypeEnum.MIX;
     })
 
+    const getIsMixsidebar = computed(() => {
+        return unref(getMenuType) === MenuTypeEnum.MIX_SIDEBAR;
+    })
+
     // Set menu configuration
     function setMenuSetting(menuSetting:Partial<MenuSetting>):void {
         appStore.setProjectConfig({ menuSetting })
@@ -32,5 +36,7 @@ export function useMenuSetting() {
         getMenuWidth,
         getIsMixMode,
         getCollapsed,
+        getIsMixsidebar,
+        setMenuSetting
     }
 }
