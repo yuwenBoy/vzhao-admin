@@ -1,4 +1,4 @@
-<script lang="tsx">
+<!-- <script lang="tsx">
 import { defineComponent } from "@vue/runtime-core";
 import { useDesign } from "/@/hooks/web/useDesign";
 
@@ -27,4 +27,4 @@ export default defineComponent({
         }
     }
 }
-</style>
+</style> -->

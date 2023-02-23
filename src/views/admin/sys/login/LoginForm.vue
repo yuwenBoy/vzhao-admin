@@ -12,7 +12,7 @@
       <Input
         size="large"
         v-model:value="formData.account"
-        :placeholder="'账号'"
+        placeholder="请输入账号"
         class="fix-auto-fill"
       />
     </FormItem>
@@ -21,10 +21,18 @@
         size="large"
         visibilityToggle
         v-model:value="formData.password"
-        placeholder="密码"
+        placeholder="请输入密码"
       />
     </FormItem>
 
+    <FormItem name="code" class="enter-x">
+      <Input
+        size="large"
+        visibilityToggle
+        v-model:value="formData.code"
+        placeholder="请输入验证码"
+      />
+    </FormItem>
     <ARow class="enter-x">
       <ACol :span="12">
         <FormItem>
@@ -114,6 +122,7 @@ const rememberMe = ref(false);
 const formData = reactive({
   account: '', // vzhao
   password: '', //123456
+  code:'', // 验证码
 });
 
 const { getFormRules } = useFormRules();
