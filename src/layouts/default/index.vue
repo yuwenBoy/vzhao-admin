@@ -1,7 +1,7 @@
 <template>
     <Layout :class="prefixCls">
       <LayoutFeatures />
-      <LayoutHeader fixed/>
+      <LayoutHeader fixed v-if="getShowFullHeaderRef"/>
       <Layout :class="[layoutClass]">
           <LayoutSideBar />
           <Layout :class="`${prefixCls}-main`">
@@ -23,6 +23,7 @@ import LayoutContent from './content/index.vue';
 import LayoutSideBar from './sider/index.vue';
 import LayoutMultipleHeader from './header/MultipleHeader.vue';
 import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
+import { useHeaderSetting } from '/@/hooks/setting/useHeaderSetting';
 export default defineComponent({
     name:'DefaultLayout',
     components:{
@@ -39,6 +40,8 @@ export default defineComponent({
 
         const { getIsMixsidebar } = useMenuSetting();
 
+        const { getShowFullHeaderRef } = useHeaderSetting();
+
         const layoutClass = computed(() => {
           let cls: string[] = ['ant-layout','ant-layout-has-sider'];
           // if(unref(getIsMixSidebar) || unref(getShowMenu)) {
@@ -50,6 +53,7 @@ export default defineComponent({
             prefixCls,
             getIsMixsidebar,
             layoutClass,
+            getShowFullHeaderRef
         }
     }
 })

@@ -1,3 +1,6 @@
+<template>
+    <div>内容</div>
+</template>
 <!-- <script lang="tsx">
 import { defineComponent } from "@vue/runtime-core";
 import { useDesign } from "/@/hooks/web/useDesign";

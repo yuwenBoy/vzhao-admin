@@ -85,7 +85,6 @@ export const useUserStore = defineStore({
         // 登录成功之后的操作
         return this.afterLoginAction(goHome);
       } catch (error) {
-        debugger;
         return Promise.reject(error);
       }
     },

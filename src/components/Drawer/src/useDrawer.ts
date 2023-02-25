@@ -1,10 +1,11 @@
 import { tryOnUnmounted } from '@vueuse/core';
-import { computed, getCurrentInstance, reactive,ref, toRaw, unref } from 'vue';
-import type { UseDrawerReturnType,DrawerInstance,ReturnMethods,UseDrawerInnerReturnType,DrawerProps} from './typing';
+import { computed, getCurrentInstance,watchEffect,nextTick, reactive,ref, toRaw, unref } from 'vue';
+import type { UseDrawerReturnType,DrawerInstance,ReturnMethods,DrawerProps} from './typing';
 import { isProdMode } from '/@/utils/env';
 
 import {isEqual} from 'lodash-es';
 import { error } from '/@/utils/log';
+import { isFunction } from '/@/utils/is';
 
 const dataTransferRef = reactive<any>({});
 
@@ -73,6 +74,62 @@ export function useDrawer():UseDrawerReturnType {
     return [register,methods];
 }
 
-// export const useDrawerInner = (callbackFn?:Fn):UseDrawerReturnType => {
-    
-// }
+export const useDrawerInner = (callbackFn?:Fn):UseDrawerReturnType => {
+    const drawerInstanceRef = ref<Nullable<DrawerInstance>>(null);
+    const currentInstance = getCurrentInstance();
+    const uidRef = ref<string>('');
+    if(!getCurrentInstance()){
+        throw new Error('useDarwerInner() can only be used inside setup() or functional components!');
+    }
+
+    const getInstance = () => {
+        const instance = unref(drawerInstanceRef);
+        if(!instance) {
+            error('useDrawerInner instance is undefined!');
+            return;
+        }
+        return instance;
+    }
+    const register = (modalInstance:DrawerInstance,uuid:string) => {
+        isProdMode() && tryOnUnmounted(() => {
+            drawerInstanceRef.value = null;
+        });
+
+        uidRef.value = uuid;
+        drawerInstanceRef.value = modalInstance;
+        currentInstance?.emit('register',modalInstance,uuid);
+    }
+
+    watchEffect(() => {
+        const data = dataTransferRef[unref(uidRef)];
+        if(!data) return;
+        if(!callbackFn || !isFunction(callbackFn)) return;
+        nextTick(() => {
+            callbackFn(data);
+        });
+    });
+
+    return [
+        register,
+        {
+            changeLoading: (loading = true) => {
+                getInstance()?.setDrawerProps({ loading });
+              },
+        
+              changeOkLoading: (loading = true) => {
+                getInstance()?.setDrawerProps({ confirmLoading: loading });
+              },
+              getVisible: computed((): boolean => {
+                return visibleData[~~unref(uidRef)];
+              }),
+        
+              closeDrawer: () => {
+                getInstance()?.setDrawerProps({ visible: false });
+              },
+        
+              setDrawerProps: (props: Partial<DrawerProps>) => {
+                getInstance()?.setDrawerProps(props);
+              },
+        }
+    ]
+}

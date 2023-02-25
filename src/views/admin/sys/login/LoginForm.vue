@@ -156,7 +156,6 @@ async function handleLogin() {
       });
     }
   } catch (error) {
-    debugger;
     createErrorModal({
       title: '错误提示',
       content: (error as unknown as Error).message || '网络异常，请检查您的网络连接是否正常!',

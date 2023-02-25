@@ -30,7 +30,6 @@ export function useI18n(namespace?: string): {
     },
   };
 
-  debugger;
   if (!i18n) {
     return normalFn;
   }
@@ -41,7 +40,6 @@ export function useI18n(namespace?: string): {
     if (!key) return '';
     if (!key.includes('.') && !namespace) return key;
     console.log(t);
-    debugger;
     return t(getKey(namespace, key), ...(arg as I18nTranslationRestParameters));
   };
   return {
