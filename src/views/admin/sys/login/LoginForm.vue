@@ -9,8 +9,7 @@
     @keypress.enter="handleLogin"
   >
     <FormItem name="account" class="enter-x">
-      <Input
-        size="large"
+      <Input 
         v-model:value="formData.account"
         placeholder="请输入账号"
         class="fix-auto-fill"
@@ -18,7 +17,6 @@
     </FormItem>
     <FormItem name="password" class="enter-x">
       <InputPassword
-        size="large"
         visibilityToggle
         v-model:value="formData.password"
         placeholder="请输入密码"
@@ -26,10 +24,7 @@
     </FormItem>
 
     <FormItem name="code" class="enter-x">
-      <Input
-        size="large"
-        visibilityToggle
-        v-model:value="formData.code"
+      <Input v-model:value="formData.code"
         placeholder="请输入验证码"
       />
     </FormItem>
@@ -49,18 +44,18 @@
     </ARow>
 
     <FormItem class="enter-x">
-      <Button type="primary" size="large" block @click="handleLogin" :loading="loading">
+      <Button type="primary" block @click="handleLogin" :loading="loading">
         登录
       </Button>
-      <Button
+      <!-- <Button
         size="large"
         class="mt-4 enter-x"
         block
         @click="setLoginState(LoginStateEnum.REGISTER)"
         >注册</Button
-      >
+      > -->
     </FormItem>
-    <ARow class="enter-x">
+    <!-- <ARow class="enter-x">
       <ACol :md="8" :xs="24"> <Button block>手机登录</Button></ACol>
       <ACol :md="8" :xs="24" class="!my-2 !md:my-0 xs:mx-0 md:mx-2">
         <Button block>二维码登录</Button></ACol
@@ -75,7 +70,7 @@
       <AlipayCircleFilled />
       <GoogleCircleFilled />
       <TwitterCircleFilled />
-    </div>
+    </div> -->
   </Form>
 </template>
 
