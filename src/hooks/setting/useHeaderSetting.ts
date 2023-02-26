@@ -13,6 +13,11 @@ export function useHeaderSetting() {
     })
     const getHeaderTheme = computed(() => appStore.getHeaderSetting.theme);
 
+const getShowInsetHeaderRef = computed(() => {
+    const need = !unref(getFullContent) && unref(getShowHeader);
+    return (need && !unref(getShowMixHeaderRef)) || (need && unref(getIsTopMenu)) || (need && unref(getIsMixSidebar))
+})
+
     const getShowFullHeaderRef = computed(() => {
         return (
             !unref(getFullContent)  && unref(getShowMixHeaderRef) && unref(getShowHeader) 
@@ -32,6 +37,7 @@ export function useHeaderSetting() {
         getShowFullHeaderRef,
         getShowMixHeaderRef,
         getShowHeader,
-        getFixed
+        getFixed,
+        getShowInsetHeaderRef
     }
 }
