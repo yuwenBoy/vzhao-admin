@@ -13,6 +13,7 @@
     :width="getMenuWidth"
     :theme="getMenuTheme"
     :collapsed="getCollapsed"
+    :collapsedWidth="getCollapsedWidth"
   >
    left
   </Sider>
@@ -23,6 +24,7 @@ import { Layout } from 'ant-design-vue';
 import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
 import { useDesign } from '/@/hooks/web/useDesign';
 import { useAppInject } from '/@/hooks/web/useAppInject';
+import { useSiderEvent } from './useLayoutSider';
 
 export default defineComponent({
   name: 'LayoutSideBar',
@@ -32,6 +34,7 @@ export default defineComponent({
     const { getIsMobile } = useAppInject();
     const { getCollapsed,getIsMixMode,getMenuTheme,
      getRealWidth,getMenuFixed, getMenuWidth,getSplit, getMenuHidden } = useMenuSetting();
+    const { getCollapsedWidth } = useSiderEvent(); 
     const { prefixCls } = useDesign('layout-sideBar');
     const getHiddenDomStyle = computed((): CSSProperties => {
       const width = `${unref(getRealWidth)}px`;
@@ -66,7 +69,8 @@ export default defineComponent({
       getHiddenDomStyle,
       showClassSideBarRef,
       getSiderClass,
-      getMenuTheme
+      getMenuTheme,
+      getCollapsedWidth
     };
   },
 });

@@ -1,5 +1,5 @@
 <template>
-    <span :class="[prefixCls,theme]">
+    <span :class="[prefixCls,theme]" @click="toggleCollapsed">
         <MenuUnfoldOutlined v-if="getCollapsed" /> <MenuFoldOutlined v-else /> 
     </span>
 </template>

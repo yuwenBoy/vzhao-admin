@@ -1,11 +1,11 @@
 <template>
-  <div :style="getPlaceholderDomStyle" v-if="getIsShowPlaceholderDom">12344</div>
+  <div :style="getPlaceholderDomStyle" v-if="getIsShowPlaceholderDom"></div>
   <div
     :style="getWrapStyle"
     :class="getClass"
   >
     <LayoutHeader v-if="getShowInsetHeaderRef"/>
-    <MultipleTabs />
+    <MultipleTabs v-if="getShowTabs"/>
   </div>
 </template>
 <script lang="ts">
@@ -73,12 +73,16 @@ export default defineComponent({
         return unref(getFixed) || unref(getShowFullHeaderRef);
     })
 
+    const getShowTabs = computed(() => {
+      return unref(getShowMultipleTab) && !unref(getFullContent);
+    })
+
     return {
       getClass,
       prefixCls,
       getWrapStyle,
       getPlaceholderDomStyle,
-      getIsShowPlaceholderDom,getShowInsetHeaderRef
+      getIsShowPlaceholderDom,getShowInsetHeaderRef,getShowTabs
     };
   },
 });

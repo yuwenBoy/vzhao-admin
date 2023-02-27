@@ -18,10 +18,10 @@ export function useRootSetting() {
   const getShowDarkModeToggle = computed(() => appStore.getProjectConfig.showDarkModeToggle);
 
   const getDarkMode = computed(() => appStore.getDarkMode);
-
+  const getShowBreadCrumb = computed(() => appStore.getProjectConfig.showBreadCrumb);
   const getCanEmbedIFramePage = computed(() => appStore.getProjectConfig.canEmbedIFramePage);
-  const getOpenKeepAlive = computed(() => appStore.getProjectConfig.openKeepAlive)
-  const getShowLogo = computed(() => appStore.getProjectConfig.showLogo)
+  const getOpenKeepAlive = computed(() => appStore.getProjectConfig.openKeepAlive);
+  const getShowLogo = computed(() => appStore.getProjectConfig.showLogo);
   const getPageLoading = computed(() => appStore.getPageLoading);
   const getLayoutContentMode = computed(() =>
     appStore.getProjectConfig.contentMode === ContentEnum.FULL
@@ -41,6 +41,8 @@ export function useRootSetting() {
     getLayoutContentMode,
     getPageLoading,
     getOpenKeepAlive,
-    getCanEmbedIFramePage
+    getShowBreadCrumb,
+    getCanEmbedIFramePage,
+    getShowLogo
   };
 }

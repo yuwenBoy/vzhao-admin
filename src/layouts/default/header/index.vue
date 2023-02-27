@@ -1,10 +1,14 @@
 <template>
   <Header :class="getHeaderClass">
     <div :class="`${prefixCls}-left`">
-      <AppLogo :class="`${prefixCls}-logo`" :theme="getHeaderTheme" :style="getLogoWidth" />
-      <LayoutTrigger />
+      <AppLogo v-if="getShowHeaderLogo || getIsMobile" :class="`${prefixCls}-logo`" :theme="getHeaderTheme" :style="getLogoWidth" />
+      <LayoutTrigger v-if="(getShowContent && getShowHeaderTrigger && !getSplit && !getIsMixSidebar) || getIsMobile" :theme="getHeaderTheme" :sider="false"/>
+      <LayoutBreadcrumb :theme="getHeaderTheme"/>
     </div>
-    <div :class="`${prefixCls}-menu`"> 1 </div>
+    <div :class="`${prefixCls}-menu`">
+      123
+    <!-- <LayoutMenu /> -->
+    </div>
     <div :class="`${prefixCls}-action`"> 
        <Notify :class="`${prefixCls}-action__item notify-item`"/>
 
@@ -26,11 +30,13 @@ import { useHeaderSetting } from '/@/hooks/setting/useHeaderSetting';
 import { propTypes } from '/@/utils/propTypes';
 import { useAppInject } from '/@/hooks/web/useAppInject';
 import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
-import { Notify, FullScreen,UserDropDown } from './components'
+import { Notify, FullScreen,UserDropDown,LayoutBreadcrumb } from './components'
 import { createAsyncComponent } from '/@/utils/factory/createAsyncComponent';
+// import LayoutMenu from '../menu/index.vue';
 export default defineComponent({
   name: 'LayoutHeader',
-  components: { Header: Layout.Header, AppLogo, LayoutTrigger,UserDropDown,FullScreen,Notify,
+  components: { Header: Layout.Header, AppLogo, LayoutTrigger,LayoutBreadcrumb,UserDropDown,FullScreen,Notify,
+    // LayoutMenu,
     SettingDrawer: createAsyncComponent(() => import('/@/layouts/default/setting/index.vue'))
   },
   props: {
@@ -39,9 +45,10 @@ export default defineComponent({
   setup(props) {
     const { prefixCls } = useDesign('layout-header');
 
-    const { getIsMixMode, getMenuWidth } = useMenuSetting();
+    const { getIsMixMode,getShowHeaderTrigger, getSplit,getMenuWidth,getIsMixSidebar } = useMenuSetting();
 
-    const { getHeaderTheme } = useHeaderSetting();
+    const { getHeaderTheme,getShowHeaderLogo,getShowContent } = useHeaderSetting();
+
 
     const { getIsMobile } = useAppInject();
     const getHeaderClass = computed(() => {
@@ -65,7 +72,7 @@ export default defineComponent({
       return { width: `${width}px` };
     });
 
-    return { prefixCls, getHeaderTheme, getHeaderClass, getLogoWidth };
+    return { prefixCls,getShowContent,getSplit,getShowHeaderLogo,getShowHeaderTrigger,getHeaderTheme, getHeaderClass, getIsMobile,getLogoWidth,getIsMixSidebar };
   },
 });
 </script>
