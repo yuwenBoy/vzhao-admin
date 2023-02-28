@@ -1,6 +1,7 @@
 <template>
    <div @click="openDrawer(true)">
        <Icon icon="ion:settings-outline" />
+       <!-- 此组件报错：TypeError: Cannot read properties of undefined (reading 'modules') -->
        <!-- <SettingDrawer @register="register"/> -->
    </div>
 </template>

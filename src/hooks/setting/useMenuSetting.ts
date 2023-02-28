@@ -1,4 +1,5 @@
 import { computed, unref, ref } from 'vue';
+import { useFullContent } from '../web/useFullContent';
 import { SIDE_BAR_MINI_WIDTH, SIDE_BAR_SHOW_TIT_MINI_WDITH } from '/@/enums/appEnum';
 import { MenuModeEnum, MenuTypeEnum } from '/@/enums/menuEnum';
 import { SIDE_BAR_BG_COLOR_LIST } from '/@/settings/desiginSetting';
@@ -8,6 +9,7 @@ export interface MenuSetting {}
 
 const mixSideHasChildren = ref(false);
 export function useMenuSetting() {
+  const { getFullContent: fullContent } = useFullContent();
   const appStore = useAppStore();
   const getMenuType = computed(() => appStore.getMenuSetting.type);
 
@@ -22,15 +24,21 @@ export function useMenuSetting() {
     return unref(getMenuMode) === MenuModeEnum.INLINE && unref(getMenuType) === MenuTypeEnum.MIX;
   });
 
+  const getShowSidebar = computed(() => {
+    return (
+      unref(getSplit) ||
+      (unref(getShowMenu) && unref(getMenuMode) !== MenuModeEnum.HORIZONTAL && !unref(fullContent))
+    );
+  });
+
   const getIsSidebarType = computed(() => unref(getMenuType) === MenuTypeEnum.SIDEBAR);
 
   const getIsTopMenu = computed(() => unref(getMenuType) === MenuTypeEnum.TOP_MENU);
 
-
   const getMiniWidthNumber = computed(() => {
     const { collapsedShowTitle } = appStore.getMenuSetting;
-    return collapsedShowTitle ? SIDE_BAR_SHOW_TIT_MINI_WDITH : SIDE_BAR_MINI_WIDTH
-  })
+    return collapsedShowTitle ? SIDE_BAR_SHOW_TIT_MINI_WDITH : SIDE_BAR_MINI_WIDTH;
+  });
 
   const getIsMixSidebar = computed(() => {
     return unref(getMenuMode) === MenuModeEnum.HORIZONTAL;
@@ -39,9 +47,13 @@ export function useMenuSetting() {
   const getShowMenu = computed(() => appStore.getMenuSetting.show);
 
   const getSplit = computed(() => appStore.getMenuSetting.split);
+  
+  const getTrigger = computed(() => appStore.getMenuSetting.trigger);
 
   const getMenuHidden = computed(() => appStore.getMenuSetting.hidden);
 
+  const getCanDrag = computed(() => appStore.getMenuSetting.canDrag);
+  
   const getMixSideFixed = computed(() => appStore.getMenuSetting.mixSideFixed);
 
   const getRealWidth = computed(() => {
@@ -75,7 +87,7 @@ export function useMenuSetting() {
         ? (unref(getCollapsed) ? SIDE_BAR_MINI_WIDTH : SIDE_BAR_SHOW_TIT_MINI_WDITH) +
           (unref(getMixSideFixed) && unref(mixSideHasChildren) ? unref(getRealWidth) : 0)
         : unref(getRealWidth);
-    return `calc(100%- ${unref(width)}px)`;
+    return `calc(100% - ${unref(width)}px)`;
   });
 
   // Set menu configuration
@@ -99,6 +111,7 @@ export function useMenuSetting() {
     getIsMixSidebar,
     getCalcContentWidth,
     getSplit,
+    getTrigger,
     getRealWidth,
     getMenuTheme,
     getMenuHidden,
@@ -107,6 +120,8 @@ export function useMenuSetting() {
     getMenuMode,
     getShowHeaderTrigger,
     getMenuType,
-    getMiniWidthNumber
+    getMiniWidthNumber,
+    getShowSidebar,
+    getCanDrag
   };
 }

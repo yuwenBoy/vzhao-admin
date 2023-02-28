@@ -15,6 +15,8 @@ type RootSetting = Omit<
 export function useRootSetting() {
   const appStore = useAppStore();
 
+  const getSettingButtonPosition = computed(() => appStore.getProjectConfig.settingButtonPosition);
+
   const getShowDarkModeToggle = computed(() => appStore.getProjectConfig.showDarkModeToggle);
 
   const getDarkMode = computed(() => appStore.getDarkMode);
@@ -22,6 +24,12 @@ export function useRootSetting() {
   const getCanEmbedIFramePage = computed(() => appStore.getProjectConfig.canEmbedIFramePage);
   const getOpenKeepAlive = computed(() => appStore.getProjectConfig.openKeepAlive);
   const getShowLogo = computed(() => appStore.getProjectConfig.showLogo);
+
+  const getShowSettingButton = computed(() => appStore.getProjectConfig.showSettingButton);
+
+  const getFullContent = computed(() => appStore.getProjectConfig.fullContent);
+
+  const getShowBreadCrumbIcon = computed(() => appStore.getProjectConfig.showBreadCrumbIcon);
   const getPageLoading = computed(() => appStore.getPageLoading);
   const getLayoutContentMode = computed(() =>
     appStore.getProjectConfig.contentMode === ContentEnum.FULL
@@ -43,6 +51,10 @@ export function useRootSetting() {
     getOpenKeepAlive,
     getShowBreadCrumb,
     getCanEmbedIFramePage,
-    getShowLogo
+    getShowLogo,
+    getShowBreadCrumbIcon,
+    getShowSettingButton,
+    getSettingButtonPosition,
+    getFullContent
   };
 }

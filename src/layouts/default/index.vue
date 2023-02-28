@@ -3,7 +3,7 @@
       <LayoutFeatures />
       <LayoutHeader fixed v-if="getShowFullHeaderRef"/>
       <Layout :class="[layoutClass]">
-          <LayoutSideBar />
+          <LayoutSideBar v-if="getShowSidebar || getIsMobile"/>
           <Layout :class="`${prefixCls}-main`">
               <LayoutMultipleHeader />
               <LayoutContent />
@@ -13,7 +13,7 @@
     </Layout>
 </template>
 <script lang="ts">
-import { computed, defineComponent, unref} from 'vue';
+import { computed, defineComponent} from 'vue';
 import { Layout } from 'ant-design-vue';
 import { useDesign } from '/@/hooks/web/useDesign';
 import { createAsyncComponent } from '/@/utils/factory/createAsyncComponent';
@@ -24,6 +24,7 @@ import LayoutSideBar from './sider/index.vue';
 import LayoutMultipleHeader from './header/MultipleHeader.vue';
 import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
 import { useHeaderSetting } from '/@/hooks/setting/useHeaderSetting';
+import { useAppInject } from '/@/hooks/web/useAppInject';
 export default defineComponent({
     name:'DefaultLayout',
     components:{
@@ -38,7 +39,9 @@ export default defineComponent({
     setup(){
         const { prefixCls } = useDesign('default-layout');
 
-        const { getIsMixsidebar } = useMenuSetting();
+        const { getIsMobile } = useAppInject();
+
+        const {getShowSidebar } = useMenuSetting();
 
         const { getShowFullHeaderRef } = useHeaderSetting();
 
@@ -51,9 +54,11 @@ export default defineComponent({
         })
         return {
             prefixCls,
-            getIsMixsidebar,
+            // getIsMixsidebar,
             layoutClass,
-            getShowFullHeaderRef
+            getShowFullHeaderRef,
+            getShowSidebar,
+            getIsMobile
         }
     }
 })

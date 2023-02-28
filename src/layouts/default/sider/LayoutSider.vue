@@ -15,7 +15,11 @@
     :collapsed="getCollapsed"
     :collapsedWidth="getCollapsedWidth"
   >
-   left
+   <template #trigger v-if="getShowTrigger">
+     <LayoutTrigger />
+   </template>
+   <LayoutMenu />
+   <DragBar ref="dragBarRef" />
   </Sider>
 </template>
 <script lang="ts">
@@ -24,14 +28,19 @@ import { Layout } from 'ant-design-vue';
 import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
 import { useDesign } from '/@/hooks/web/useDesign';
 import { useAppInject } from '/@/hooks/web/useAppInject';
-import { useSiderEvent } from './useLayoutSider';
+import { useSiderEvent, useTrigger } from './useLayoutSider';
+import LayoutMenu from '../menu/index.vue';
+import LayoutTrigger from '/@/layouts/default/trigger/index.vue';
+import DragBar from './DragBar.vue';
 
 export default defineComponent({
   name: 'LayoutSideBar',
-  components: { Sider: Layout.Sider },
+  components: { Sider: Layout.Sider,DragBar,LayoutTrigger,LayoutMenu },
   setup() {
     const sideRef = ref<ElRef>(null);
+    const dragBarRef = ref<ElRef>(null);
     const { getIsMobile } = useAppInject();
+    const { getShowTrigger } = useTrigger(getIsMobile);
     const { getCollapsed,getIsMixMode,getMenuTheme,
      getRealWidth,getMenuFixed, getMenuWidth,getSplit, getMenuHidden } = useMenuSetting();
     const { getCollapsedWidth } = useSiderEvent(); 
@@ -60,6 +69,7 @@ export default defineComponent({
     })
 
     return {
+      dragBarRef,
       sideRef,
       getCollapsed,
       getMenuWidth,
@@ -70,7 +80,8 @@ export default defineComponent({
       showClassSideBarRef,
       getSiderClass,
       getMenuTheme,
-      getCollapsedWidth
+      getCollapsedWidth,
+      getShowTrigger
     };
   },
 });

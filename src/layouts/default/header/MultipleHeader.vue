@@ -1,9 +1,6 @@
 <template>
   <div :style="getPlaceholderDomStyle" v-if="getIsShowPlaceholderDom"></div>
-  <div
-    :style="getWrapStyle"
-    :class="getClass"
-  >
+  <div :style="getWrapStyle" :class="getClass">
     <LayoutHeader v-if="getShowInsetHeaderRef"/>
     <MultipleTabs v-if="getShowTabs"/>
   </div>
@@ -80,9 +77,12 @@ export default defineComponent({
     return {
       getClass,
       prefixCls,
+      getIsFixed,
       getWrapStyle,
       getPlaceholderDomStyle,
-      getIsShowPlaceholderDom,getShowInsetHeaderRef,getShowTabs
+      getIsShowPlaceholderDom,
+      getShowInsetHeaderRef,
+      getShowTabs
     };
   },
 });
