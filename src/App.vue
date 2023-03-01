@@ -1,7 +1,7 @@
 <template>
   <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
   <!-- <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" /> -->
-  <ConfigProvider>
+  <ConfigProvider :locale="getAntdLocale">
     <AppProvider>
       <RouterView />
     </AppProvider>
@@ -22,12 +22,15 @@
 
 <script lang="ts" setup>
 import { ConfigProvider } from "ant-design-vue";
-import { defineComponent, watch } from "vue";
-import { useUserStore } from "/@/store/modules/user";
-import { useRoute } from "vue-router";
+// import { defineComponent, watch } from "vue";
+// import { useUserStore } from "/@/store/modules/user";
+// import { useRoute } from "vue-router";
 import { AppProvider } from "/@/components/Application";
+import { useLocale } from "./locales/useLocale";
 
-const userStore = useUserStore();
+ const { getAntdLocale } = useLocale();
+
+// const userStore = useUserStore();
 // export default defineComponent({
 //   setup() {
 //     const route = useRoute();

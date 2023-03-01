@@ -113,6 +113,7 @@ const userStore = useUserStore();
 const formRef = ref();
 const loading = ref(false);
 const rememberMe = ref(false);
+  
 
 const formData = reactive({
   account: '', // vzhao
@@ -128,7 +129,8 @@ const getShow = computed(() => unref(getLoginState) === LoginStateEnum.LOGIN);
 
 const { validForm } = useFormValid(formRef);
 const { notification, createErrorModal } = useMessage();
-
+debugger
+console.log(t('sys.admin.loginSuccessTitle'));
 // 用户登录
 async function handleLogin() {
   const data = await validForm();
@@ -145,7 +147,7 @@ async function handleLogin() {
     });
     if (userInfo) {
       notification.success({
-        message: '登录成功',//t('sys.admin.loadinSuccessTitle'),// '登录成功',
+        message: t('sys.admin.loginSuccessTitle'),//'登录成功',
         description: '欢迎回来：'+userInfo.cname,
         duration: 3,
       });
